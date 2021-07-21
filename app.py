@@ -6,8 +6,10 @@ import subprocess
 
 app = Flask(__name__)
 
-app.config['UPLOAD_EXTENSION_ONNX'] = ['.onnx']
+app.config['UPLOAD_EXTENSION_ONNX'] = ['.onnx'] 
 app.config['UPLOAD_EXTENSION_VNNLIB'] = ['.vnnlib']
+
+#All uploaded files are saved into this "upload" folder
 app.config['UPLOAD_PATH'] = 'uploads'
 
 #index.html should be kept in templates folder
