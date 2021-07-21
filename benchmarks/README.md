@@ -4,7 +4,20 @@ acasxu
 This benchmark contains -
    45 fully connected networks with 6 hidden layers and 5 inputs , 5 outputs and 5 ReLU nodes in each layer.
    10 properties
+   10 instances out of 450(45\*10) instances  are considered as ACAS-HARD
 
+ACASXU-HARD: 
+
+net 4-6, prop 1
+net 4-8, prop 1
+net 3-3, prop 2
+net 4-2, prop 2
+net 4-9, prop 2
+net 5-3, prop 2
+net 3-6, prop 3
+net 5-1, prop 3
+net 1-9, prop 7
+net 3-3, prop 9
 
 mnistfc
 ---------
