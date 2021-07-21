@@ -34,8 +34,8 @@ A. Folder structure
          
             pip3 install pipreqs
 
-            pipreqs /home/moumita/Ericsson/test/FFN/ --force
-       
+            pipreqs . --ignore benchmarks --force
+       Note : benchmark directory contains some pthoon programs which are not needed to run FFN
   
    
 B: Getting Started
