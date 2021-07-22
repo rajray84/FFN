@@ -90,7 +90,7 @@ All the layers use ReLU activation except the last layer.
            
          gzip -d <.gz file>
          
-**Note : Replace all .gz file path by .onnx filepath nn4sys_instances.csv 
+**Note : Replace all .gz file path by .onnx filepath in nn4sys_instances.csv 
 
 
 oval21
