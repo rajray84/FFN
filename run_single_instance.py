@@ -47,8 +47,8 @@ def runSingleInstance(onnxFile,vnnlibFile):
           resultStr = status+", "+str(round(timeElapsed,4))
           return resultStr
     
-   resultStr = "timeout,"+str(round(timeElapsed,4)) + "\n"
-   return resultStr
+   #resultStr = "timeout,"+str(round(timeElapsed,4)) + "\n"
+   #return resultStr
 
 
 #Main function
