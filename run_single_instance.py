@@ -121,17 +121,15 @@ if __name__ == '__main__':
    
    '"runSingleInstance" will continue until any adversarial found or timeout occurs'
    'When timeout occurs codes written within exception will be executed'
+   outFile = open(resultFile, "w")
    try:
        retStatus = runSingleInstance(onnxFile,vnnlibFile)
-       outFile = open(resultFile, "w")
-       #print("\nOutput is written in - \"{0}\"".format(resultFile))
-       outFile.write(retStatus)
-       outFile.close()
+       print("\nOutput is written in - \"{0}\"".format(resultFile))
+       
    except Exception as exc:
        print("\nOutput is written in - \"{0}\"".format(resultFile))
-       outFile = open(resultFile, "w")
-       printStr = "timeout," + str(timeout) + "\n" 
-       outFile.write(printStr)
-       outFile.close()
+       retStatus = "timeout," + str(timeout) + "\n" 
        print(exc)
 
+   outFile.write(retStatus)
+   outFile.close()
