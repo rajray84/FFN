@@ -106,11 +106,13 @@ b.
  
  ---After evaluation, result is stored in default result file - "out.txt"
  
- ---timeout parameter is set as 60 sec(default)
+ ---timeout parameter is not mentioned, 60 sec is assigned as a default value for it
 
 2: To run all instances of a given benchmark category (from "benchmark" folder)
    ---------------------------------------------------------------------------
       python3 run_all_categories.py  [-c category] [-o result_file_path]
+
+Note: runs all the instances from category/caegory_instance.csv file
 
 Example run:
 
@@ -118,17 +120,20 @@ a.
 
       python3 run_all_categories.py -c acasxu -o report.txt 
 
- ---It evaluates all networks(.onnx files in acaxu directory) for all the properies(all .vnnlib files in acasxu directory) from "acasxu" benchmark category 
+ ---It evaluates all the instances (.onnx files and .vnnlib files) from "acasxu/acasxu_instance.csv" files
  
- ---After evalauation result is stored in report.txt
+ ---timeout value for each of the instance is mentioned in this .csv file
+ 
+ ---After evaluation result is stored in report.txt
+ 
 
 b.
 
       python3 run_all_categories.py 
 
- ---Default category is - "test"
+ ---If no category is mentioned, "test" is considered as a default category
  ---It evaluates all networks(.onnx files in test directory) for all the properies(all .vnnlib files in test directory) from "test" benchmark category 
  
- ---After evalauation result is stored in "report_test.txt" (default)
+ ---If result_file_path is not mentioned, "report_test.txt"  is considered as a default result_file_path to store the result after evaluation
 
 ***Note: Since FFN has randomization, results may vary accross the runs.
