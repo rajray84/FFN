@@ -28,11 +28,7 @@ time:
 
 from Racos import RacosOptimization
 from Components import Dimension
-from ObjectiveFunction import Sphere
-from ObjectiveFunction import Ackley
-from ObjectiveFunction import FFN
-from ObjectiveFunction import SetCover
-from ObjectiveFunction import MixedFunction
+from ObjectiveFunction import nneval
 from vnnlib import readVnnlib, getIoNodes
 from util import removeUnusedInitializers, findObjectiveFuncionType
 
@@ -103,28 +99,20 @@ def runRacos(onnxFilename, vnnlibFilename):
        for i in range(DimSize):
           dim.setRegion(i, inRanges[i], True)
 
-       for i in range(repeat):
-          #print (i, ':--------------------------------------------------------------')
-          racos = RacosOptimization(dim, onnxModel,inpDtype, inpShape, specList, targetAndType[0], targetAndType[1]) #FFN 
+       racos = RacosOptimization(dim, onnxModel,inpDtype, inpShape, specList, targetAndType[0], targetAndType[1]) #FFN 
 
-          # call online version RACOS
-          # racos.OnlineTurnOn()
-          # racos.ContinueOpt(Ackley, SampleSize, Budget, PositiveNum, RandProbability, UncertainBits)
 
-          ret = racos.ContinueOpt(FFN, SampleSize, MaxIteration, PositiveNum, RandProbability, UncertainBits) #FFN
+       ret = racos.ContinueOpt(nneval, SampleSize, MaxIteration, PositiveNum, RandProbability, UncertainBits) #FFN
         
-          if (ret == 1):
-             endTime = time.time()
-             timeElapsed = endTime - startTime
-             retStmt = "Status : violated , Time Elapsed :"+ str(round(timeElapsed,4))+ " second"
-             return retStmt
+       if (ret == 1):
+          endTime = time.time()
+          timeElapsed = endTime - startTime
+          retStmt = "Status : violated , Time Elapsed :"+ str(round(timeElapsed,4))+ " second"
+          return retStmt
 
-          # print racos.getOptimal().getFeatures()
-          #print (racos.getOptimal().getFitness())
-          results.append(racos.getOptimal().getFitness())
-
-    #print ('======================================================================')
-    #      ResultAnalysis(results, 5)
+       # print racos.getOptimal().getFeatures()
+       # print (racos.getOptimal().getFitness())
+       results.append(racos.getOptimal().getFitness())
     
     endTime = time.time()
     timeElapsed = endTime - startTime
@@ -137,19 +125,7 @@ def runRacos(onnxFilename, vnnlibFilename):
 if __name__ == '__main__':
 
   if True:
-  
-    # dimension setting
-    #DimSize = 100
-    #regs.append(0.0)
-    #regs.append(1.0)
-
-    #dim = Dimension()
-    #dim.setDimensionSize(DimSize)
-    #for i in range(DimSize):
-    #    dim.setRegion(i, regs, True)
-
    #FFN starts
-
     onnxFilename = sys.argv[1]
     vnnlibFilename =  sys.argv[2]
     rStr = runRacos(onnxFilename,vnnlibFilename)
