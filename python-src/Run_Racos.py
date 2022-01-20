@@ -37,6 +37,7 @@ import onnx
 import time
 import onnxruntime as rt
 import sys
+import csv
 
 # parameters
 SampleSize = 20             # the instance number of sampling in an iteration
@@ -128,8 +129,16 @@ if __name__ == '__main__':
    #FFN starts
     onnxFilename = sys.argv[1]
     vnnlibFilename =  sys.argv[2]
+    ce_filename = "ce.csv" # file to collect the counterexamples
+    fields = ["x0","x1","x2","x3","x4","y0","y1","y2","y3","y4"]
+    with open(ce_filename,'w') as csvfile:
+       csvwriter = csv.writer(csvfile)
+       csvwriter.writerow(fields)
+    csvfile.close()
+    # adds the fields to the csv file
     rStr = runRacos(onnxFilename,vnnlibFilename)
-    print(rStr)
+    print("The counterexample(s) are copied to ce.csv file")
+#   print(rStr)
 
    #FFN ends
 

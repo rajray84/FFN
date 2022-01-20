@@ -6,6 +6,7 @@ import onnx
 import onnxruntime as ort
 
 import numpy as np
+import csv
 
 def predictWithOnnxruntime(modelDef, *inputs):
     'run an onnx model'
@@ -25,7 +26,6 @@ def removeUnusedInitializers(model):
 
     for init in model.graph.initializer:
         found = False
-        
         for node in model.graph.node:
             for i in node.input:
                 if init.name == i:
@@ -170,17 +170,13 @@ def propCheck(inputs,specs,outputs):
    for propMat, propRhs in specs:
        vec = propMat.dot(outputs)
        sat = np.all(vec <= propRhs)
-
-       if sat:
-          res = 'violated'
-          print("Vec: ",vec)
-          print("PropRhs: ",propRhs)
-          break
-
-   if res == 'violated':
-      print("\nAdversarial inputs found - ",inputs)
-      print("\nevaluated outputs - ",outputs)
-      return 1
-
+       if sat: 
+           ce_vec = []
+           ce_vec.extend(inputs)
+           ce_vec.extend(outputs)
+           filename = "ce.csv"
+           with open(filename,'a') as csvfile:
+                csvwriter = csv.writer(csvfile)
+                csvwriter.writerow(ce_vec)
    return 0
 

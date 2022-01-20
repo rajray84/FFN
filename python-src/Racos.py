@@ -195,8 +195,6 @@ class RacosOptimization:
                     break
             # FFN starts
             adv, retValFunc = func(self.__netModel,ins.getFeatures(), self.__inpDtype, self.__inpShape, self.__inpSpecs, self.__target, self.__objType) #FFN
-            if (adv == 1):
-               return 1
             ins.setFitness(retValFunc)
             # FFN ends
 
@@ -351,8 +349,6 @@ class RacosOptimization:
         
         #FFN starts
         ret = self.Initialize(func)
-        if(ret == 1) :
-           return 1
         #FFN ends
 
         if self.__OnlineSwitch is False:
@@ -372,8 +368,6 @@ class RacosOptimization:
                         if((self.InstanceInList(ins, self.__PosPop, self.__PositiveNum) is False) and (self.InstanceInList(ins, self.__NextPop, sam) is False)):
                             # FFN starts
                             adv, retValFunc = func(self.__netModel,ins.getFeatures(), self.__inpDtype, self.__inpShape, self.__inpSpecs, self.__target, self.__objType) #FFN
-                            if (adv == 1):
-                               return 1
                             ins.setFitness(retValFunc)
                             # FFN ends
                             break
@@ -403,8 +397,6 @@ class RacosOptimization:
                         self.InstanceInList(ins, self.__Pop, self.__SampleSize) is False)):
                         # FFN starts
                         adv, retValFunc = func(self.__netModel,ins.getFeatures(), self.__inpDtype, self.__inpShape, self.__inpSpecs, self.__target, self.__objType) #FFN
-                        if (adv == 1):
-                            return 1
                         ins.setFitness(retValFunc)
                         # FFN ends
                         break
